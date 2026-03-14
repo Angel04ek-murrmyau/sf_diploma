@@ -1,0 +1,30 @@
+stages:
+  - build
+  - deploy
+
+build_job:
+  stage: build
+  image: docker:latest
+  tags: 
+      - test
+  services:
+    - docker:dind
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+  script:
+    - docker build -t "$DOCKER_USER/sf-diploma:$CI_COMMIT_SHORT_SHA" .
+    - docker push "$DOCKER_USER/sf-diploma:$CI_COMMIT_SHORT_SHA"
+  
+deploy_job:
+  stage: deploy
+  image:
+    name: alpine/helm
+    entrypoint: [""]
+  tags:
+    - test
+  script:
+    - echo "Путь к конфигу $KUBECONFIG_VAR"
+    - export KUBECONFIG=$KUBECONFIG_VAR
+    - helm upgrade --install sf-diploma-django-app ./charts/django-app --namespace default --set image.tag=$CI_COMMIT_SHORT_SHA --wait

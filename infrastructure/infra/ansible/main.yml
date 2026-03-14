@@ -1,0 +1,13 @@
+- name: Setup kubernetes
+  hosts: kubernetes
+  become: true
+  gather_facts: true
+  roles:
+    - kubernetes
+  
+- name: Setup monitoring & CI/CD 
+  hosts: service
+  become: true
+  gather_facts: true
+  roles:
+    - service

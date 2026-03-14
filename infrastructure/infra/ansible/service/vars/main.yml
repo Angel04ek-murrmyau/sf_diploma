@@ -1,0 +1,5 @@
+---
+# vars file for service
+telegram_token: "Ваш токен"
+telegram_chat_id: Ваш chat id
+node_port: 30380

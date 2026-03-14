@@ -1,0 +1,13 @@
+# Секреты и ключи
+**/*.json
+**/*.tfvars
+**/key.json
+
+# Служебные папки и файлы Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.backup
+
+# Динамические файлы
+**/inventory.ini
