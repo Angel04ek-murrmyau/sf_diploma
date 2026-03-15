@@ -231,8 +231,8 @@
       receivers:
       - name: 'telegram-notifications'
         telegram_configs:
-        - bot_token: '8783801894:AAGnW8kCfRXvdRMw0BG7bxXqAKAbtfdFxJE'
-          chat_id: 430074484
+        - bot_token: {{ telegram_token }}
+          chat_id: {{ telegram_chat_id }}
           send_resolved: true
           parse_mode: 'HTML'
           message: |
